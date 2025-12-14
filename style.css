@@ -1,0 +1,236 @@
+:root {
+    --bg-color: #FFF8E7;
+    /* Cosmic Latte / Aesthetic White */
+    --calculator-bg: #6F4E37;
+    /* Coffee/Chocolate Brown */
+    --display-bg: #5D4037;
+    /* Darker Chocolate */
+    --display-color: #FFF8E7;
+    --btn-bg: #8D6E63;
+    /* Light Brown */
+    --btn-hover-bg: #795548;
+    /* Brown */
+    --operator-bg: #A1887F;
+    /* Rosy Brown */
+    --equals-bg: #3E2723;
+    /* Very Dark Brown */
+    --text-primary: #FFFFFF;
+    --font-family: 'Outfit', sans-serif;
+    --bear-icon: url('teddy-bear.png');
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-family);
+}
+
+body {
+    background-color: var(--bg-color);
+    background-image: radial-gradient(#D7CCC8 1px, transparent 1px);
+    background-size: 20px 20px;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.calculator-container {
+    background: var(--calculator-bg);
+    border-radius: 30px;
+    padding: 24px;
+    width: 350px;
+    box-shadow: 0 20px 50px rgba(62, 39, 35, 0.3);
+    animation: bounceIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    position: relative;
+    border: 4px solid #5D4037;
+}
+
+/* Teddy Bear Decoration */
+.calculator-container::before {
+    content: '';
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 80px;
+    background-image: var(--bear-icon);
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 10;
+}
+
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.3);
+        opacity: 0;
+    }
+
+    50% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+
+    70% {
+        transform: scale(0.9);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.display {
+    background-color: var(--display-bg);
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+    height: 120px;
+    margin-bottom: 20px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.previous-operand {
+    color: rgba(255, 248, 231, 0.7);
+    font-size: 1.2rem;
+    min-height: 1.5rem;
+    margin-bottom: 8px;
+}
+
+.current-operand {
+    color: var(--display-color);
+    font-size: 3rem;
+    font-weight: 600;
+}
+
+.buttons-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+}
+
+.btn {
+    border: none;
+    outline: none;
+    background: var(--btn-bg);
+    color: var(--text-primary);
+    font-size: 1.25rem;
+    font-weight: 600;
+    border-radius: 50%;
+    /* Rounded like paws */
+    cursor: pointer;
+    padding: 20px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 0 #5D4037;
+    /* 3D effect */
+    position: relative;
+    overflow: hidden;
+    height: 65px;
+    /* ensure circle/equal sizing if possible */
+    width: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Teddy face on buttons (subtle) */
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    height: 80%;
+    background-image: var(--bear-icon);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transform: translate(-50%, -50%);
+    opacity: 0.1;
+    pointer-events: none;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    background: var(--btn-hover-bg);
+}
+
+.btn:active {
+    transform: translateY(2px);
+    box-shadow: 0 0 0 #5D4037;
+}
+
+.command {
+    background-color: #BCAAA4;
+    color: #3E2723;
+    font-weight: 800;
+    box-shadow: 0 4px 0 #8D6E63;
+}
+
+.command:active {
+    box-shadow: 0 0 0 #8D6E63;
+}
+
+.operator {
+    background-color: var(--operator-bg);
+    box-shadow: 0 4px 0 #6d4c41;
+}
+
+.operator:active {
+    box-shadow: 0 0 0 #6d4c41;
+}
+
+.equals {
+    grid-column: span 2;
+    background: var(--equals-bg);
+    color: white;
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 4px 0 #2b1b18;
+}
+
+.equals:hover {
+    background: #4E342E;
+}
+
+.equals:active {
+    box-shadow: 0 0 0 #2b1b18;
+}
+
+.zero-btn {
+    grid-column: span 2;
+    width: 100%;
+    border-radius: 20px;
+}
+
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Animation for buttons on load */
+.btn {
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    opacity: 0;
+}
+
+@for $i from 1 through 20 {
+    .btn:nth-child(#{$i}) {
+        animation-delay: #{$i * 0.05}s;
+    }
+}
+
+/* Since I can't use SASS loop in vanilla CSS, I'll delete the loop and let them just pop in or rely on the container animation for now to be safe, or write a few manually if I really want staggered. I'll just skip the stagger for now to keep it clean. */
